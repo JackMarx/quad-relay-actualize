@@ -1,3 +1,5 @@
+require 'net/http'
+
 class FrontDoor
   def self.open_door_and_elevator
     uri = URI.parse("http://#{ENV['QIPADDRESS']}:#{ENV['QPORT']}/stateFull.xml?relay1state=1&relay2state=1")
