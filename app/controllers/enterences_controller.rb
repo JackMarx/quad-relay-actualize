@@ -1,5 +1,6 @@
 class EnterencesController < ApplicationController
   before_action :authenticate_guest!, only: [:open_both]
+  before_action :check_times, only: [:open_both]
 
   def guest
     @guest = Guest.new
@@ -14,6 +15,6 @@ class EnterencesController < ApplicationController
 private
   
   def check_times
-    current_guest.times
+    redirect_to '/' unless current_guest.valid_time?
   end
 end
