@@ -1,6 +1,10 @@
 class SessionsController < ApplicationController
   def create
     guest = Guest.find_by(email: session_params[:email])
+    puts "************"
+    p guest
+    puts "************"
+    
     if guest && guest.authenticate(session_params[:password])
       session[:user_id] = guest.id
     else
