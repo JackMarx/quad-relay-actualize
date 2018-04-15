@@ -2,6 +2,7 @@ require 'net/http'
 
 class FrontDoor
   def self.open_door_and_elevator
+    puts "2222222222 inside 222222222"
     uri = URI.parse("http://#{ENV['QIPADDRESS']}:#{ENV['QPORT']}/stateFull.xml?relay1state=1&relay2state=1")
     http = Net::HTTP.new(uri.host, uri.port)
     request = Net::HTTP::Get.new(uri.request_uri)
