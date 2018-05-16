@@ -7,15 +7,21 @@ class EnterencesController < ApplicationController
   end
 
   def open_both
-    puts "11111111111 it starts 1111111111111"
-    FrontDoor.open_door_and_elevator
-    CloseJob.set(wait: 30.seconds).perform_later
+    if FrontDoor.open_door_and_elevator
+      flash[:success] = "Door and Elevator are open. Wait 30 seconds before pressing again."
+      CloseJob.set(wait: 30.seconds).perform_later
+    else
+      flash[:danger] = "Failed to Open Door"
+    end
     redirect_to "/"
   end
 
 private
   
   def check_times
-    redirect_to '/' unless current_guest.valid_time?
+    unless current_guest.valid_time?
+      flash[:warning] = "Please come back during scheduled hours"
+      redirect_to '/' 
+    end
   end
 end

@@ -28,7 +28,23 @@
 
   <body>
     <div class="container">
+        <% flash.each do |name, message| %>
+            <div class="alert alert-<%= name %> alert-dismissible" role="alert">
+              <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+              <%= message %>
+            </div>
+        <% end %>
       <%= yield %>
+     <script>
+        console.log("start");
+        setTimeout(function() {
+             var alerts = document.querySelectorAll('.alert');
+             for (var i = alerts.length - 1; i >= 0; i--) {
+                 var alert = alerts[i];
+                 alert.parentNode.removeChild(alert);
+             }
+        }, 30000);
+     </script>
     </div>
   </body>
 </html>
