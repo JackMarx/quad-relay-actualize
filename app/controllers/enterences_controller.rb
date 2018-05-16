@@ -8,7 +8,7 @@ class EnterencesController < ApplicationController
 
   def open_both
     if FrontDoor.open_door_and_elevator
-      flash[:success] = "Door and Elevator are open. Wait 30 seconds before pressing again."
+      flash[:success] = "Door and Elevator are open."
       CloseJob.set(wait: 30.seconds).perform_later
     else
       flash[:danger] = "Failed to Open Door"
