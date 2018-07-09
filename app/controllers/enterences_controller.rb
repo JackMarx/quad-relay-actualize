@@ -8,6 +8,12 @@ class EnterencesController < ApplicationController
 
   def open_both
     if FrontDoor.open_door_and_elevator
+      if current_guest
+        puts "*****************"
+        puts "#{current_guest.first_name} #{current_guest.last_name} just logged in"
+        puts "*****************"
+      end
+      
       flash[:success] = "Door and Elevator are open."
       CloseJob.set(wait: 30.seconds).perform_later
     else

@@ -9,9 +9,6 @@ class FrontDoor
         request.basic_auth(ENV['QUSER'], ENV['QPWORD'])
         response = http.request(request)
         xml_doc  = Nokogiri::XML(response.body)
-        puts "*****************"
-        p xml_doc
-        puts "*****************"
         xml_doc.xpath("//relay1state").text == "1" && xml_doc.xpath("//relay2state").text == "1"
     rescue
         false
