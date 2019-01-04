@@ -11,4 +11,8 @@ private
   def authenticate_guest!
     redirect_to '/' unless current_guest
   end
+
+  # def authenticate_admin! # for creating guests by browser need email set up first.
+  #   redirect_to '/' unless current_guest.admin
+  # end
 end
