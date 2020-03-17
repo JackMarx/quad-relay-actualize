@@ -4,6 +4,10 @@ class EnterencesController < ApplicationController
 
   def guest
     @guest = Guest.new
+
+    if params[:bypass] == "true" # for COVID19 temp
+      @bypass = true
+    end
   end
 
   def open_both

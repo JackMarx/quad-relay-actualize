@@ -1,6 +1,6 @@
 <div id="spacer"></div>
 
-<% if current_guest %>
+<% if current_guest && @bypass %> <!-- COVID19 remove bypass -->
   <a href="/open_door" class="actualize-link">
     <div class="row">
       <h3 class="text-center actualize-link act-font"><%= current_guest.full_name.upcase %></h3>
@@ -20,6 +20,37 @@
         <%= link_to "Logout", logout_path, method: :delete %>
       </h1>
   </div>
+
+<% elsif current_guest %> <!-- COVID19 remove elsif section -->
+
+    <style>
+      .covid-warning {
+        background-color: #000;
+        /*background-color: #aa3300;*/
+        border-radius: 20px;
+      }
+    </style>
+
+    <div class="row">
+      <div class="covid-warning col-xs-10 col-xs-offset-1 row">
+        <%= image_tag "actualize-logo.png", class: "col-xs-6 col-xs-offset-3", style: "margin-top: 50px" %>
+        <div class="col-xs-12 text-center" style="color: white; font-size: 40px; margin: 50px 0px;">
+          We apologize for the inconvenience. Actualize HQ is temporarily closed to students in order to prevent the spread of the COVID19 virus. We will open again soon and wish you the best, please stay safe.
+        </div>
+
+        <div class="col-xs-12 text-center" style="color: white; font-size: 40px; margin: 50px 0px;">
+          Watch our slack channel for updates.
+        </div>
+      </div>
+    </div>
+
+
+  <div id="footer" >
+      <h1>
+        <%= link_to "Logout", logout_path, method: :delete %>
+      </h1>
+  </div>
+
 <% else %>
   <div class="row actualize-logo">
     <%= image_tag "actualize-logo.png", class: "col-xs-10 col-xs-offset-1" %>

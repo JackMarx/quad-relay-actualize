@@ -9,7 +9,6 @@ class Guest < ApplicationRecord
   end
 
   def valid_time?
-    
     if group_id == 2
       true
     elsif start_date < Time.now.getlocal
